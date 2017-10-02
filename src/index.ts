@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonFacebookProvider } from './ion.facebook.provider';
 
 export * from './ion.facebook.provider';
+export * from './models/facebook';
 
 @NgModule({
   imports: [
@@ -10,10 +11,10 @@ export * from './ion.facebook.provider';
   ]
 })
 export class IonFacebookProviderModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(permissions?: string[]): ModuleWithProviders {
     return {
       ngModule: IonFacebookProviderModule,
-      providers: [IonFacebookProvider]
+      providers: [IonFacebookProvider, {provide: 'permissions', useValue: permissions}]
     };
   }
 }

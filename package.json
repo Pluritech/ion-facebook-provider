@@ -69,5 +69,8 @@
   },
   "engines": {
     "node": ">=6.0.0"
+  },
+  "dependencies": {
+    "@ionic-native/facebook": "^4.3.0"
   }
 }

@@ -17,20 +17,24 @@ and then from your Ionic Project `AppModule`:
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { MyApp } from './app.component';
 
-// Import your library
-import { IonFacebookModule } from '@pluritech/ion-facebook-provider';
+//Is required import the Facebook from Ionic Native
+import { Facebook } from '@ionic-native/facebook';
+// Import library wrapper 
+import { IonFacebookProviderModule } from '@pluritech/ion-facebook-provider';
 
 @NgModule({
   declarations: [
-    AppComponent
+    MyApp
   ],
   imports: [
     BrowserModule,
 
-    // Specify your library as an import
-    IonFacebookProviderModule
+    // Dont forget put them here
+    IonFacebookProviderModule,
+    Facebook
+
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -38,7 +42,50 @@ import { IonFacebookModule } from '@pluritech/ion-facebook-provider';
 export class AppModule { }
 ```
 
-Once your library is imported, you can use its provider in your Components:
+Once the library is imported, you can use its provider in your Components or Providers:
+```typescript
+import { IonFacebookProvider } from '@pluritech/ion-facebook-provider';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  constructor(public navCtrl: NavController, private ionFacebookProvider: IonFacebookProvider) {
+  }
+}
+```
+
+### Method Login
+You can use these method to make login and receive the datas as *userID*, *accessToken* and etc:
+
+- How Use:
+```typescript
+import { IonFacebookProvider, FbLoginResponse } from '@pluritech/ion-facebook-provider';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  constructor(public navCtrl: NavController, private ionFacebookProvider: IonFacebookProvider) {
+    console.log('IonFacebookProvider', this.ionFacebookProvider.listPermisions());
+  }
+
+  public loginTest() {
+    this.ionFacebookProvider.login()
+    .then((res: FbLoginResponse) => console.log(res))
+    .catch(error => console.log(error));
+  }
+}
+```
+- What there in **FbLoginResponse**
 
 
 ## Development
