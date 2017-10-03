@@ -28,8 +28,20 @@ export class IonFacebookProvider {
     return this.fb.logout();
   }
 
-  public getPictureUser(): Promise<UserPicture> {
-    return this.requestDataByGraphApi('me/picture/?redirect=false');
+  public getPictureUser(config?: {setBase64?: boolean}): Promise<UserPicture> {
+    return this.requestDataByGraphApi('me/picture/?redirect=false')
+      .then((picture: UserPicture) => {
+        if  (config && config.setBase64) {
+          return this.getBase64FromPicture(picture.data.url)
+            .then(base64 => {
+              picture.data.base64 = base64;
+              return picture;
+            }).catch(error => picture);
+        } else {
+          return picture;
+        }
+      })
+      .catch(error => { throw error; });
   }
 
   public listPermisions(): string[] {
@@ -73,22 +85,15 @@ export class IonFacebookProvider {
   }
 
   private _handleUserPicture(user: FbLoginResponse): Promise<FbLoginResponse> {
-    return this.getPictureUser()
+    return this.getPictureUser({setBase64: true})
       .then(picture => {
-        if (picture && picture.data && picture.data.url) {
-          user.picture = picture.data.url;
-          return this.getBase64FromPicture(user.picture)
-            .then(base64 => {
-              if (base64.startsWith('data:')) {
-                base64 = base64.substring(22, base64.length);
-              }
-              user.picture64 = base64;
-              return user;
-            })
-            .catch((error) => user);
-        } else {
-          return user;
+        user.picture = picture.data.url;
+        let base64 = picture.data.base64;
+        if (base64.startsWith('data:')) {
+          base64 = base64.substring(22, base64.length);
         }
+        user.picture64 = base64;
+        return user;
       })
       .catch(error => user);
   }

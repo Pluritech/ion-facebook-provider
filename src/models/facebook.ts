@@ -9,6 +9,7 @@ export interface FbLoginResponse extends FacebookLoginResponse {
 export interface UserPicture {
   data: {
     url: string;
+    base64?: string;
     width?: number;
     is_silhouette: boolean;
     height?: number;
