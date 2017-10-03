@@ -60,7 +60,10 @@ export class HomePage {
 ```
 
 ### Method Login
-You can use these method to make login and receive the datas as *userID*, *accessToken* and etc:
+```typescript
+public login(getPictureBase64?: boolean);
+```
+You can use the method Login to make login and receive the datas as *userID*, *accessToken* and etc. These method too give you a Header with access token to send to your server.
 
 - How Use:
 ```typescript
@@ -78,7 +81,7 @@ export class HomePage {
     console.log('IonFacebookProvider', this.ionFacebookProvider.listPermisions());
   }
 
-  public loginTest() {
+  public loginTest(true) {
     this.ionFacebookProvider.login()
     .then((res: FbLoginResponse) => console.log(res))
     .catch(error => console.log(error));
@@ -86,7 +89,14 @@ export class HomePage {
 }
 ```
 - What there in **FbLoginResponse**
-
+ Field | Can be null | Description
+------ | ----------- | ----------- 
+email | true | email from user logged in Facebook
+userIdFace | false | ID Facebook from user logged in Facebook
+accessToken | false | token of session from user logged in Facebook
+name | false | name from user logged in Facebook
+picture| true | url picture from user logged in Facebook
+picture64 | true | picture base 64 from user logged in Facebook if param getPictureBase64 set true and the Facebook allow get url picture
 
 ## Development
 
