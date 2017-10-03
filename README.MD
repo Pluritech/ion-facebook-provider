@@ -120,7 +120,7 @@ export class HomePage {
 ```
 
 
-### Method getPictureUser()
+### Method getPictureUser(config?: {setBase64?: boolean})
 You can get picture of user. Required open session and a token valid to use.
 ```typescript
 import { IonFacebookProvider, UserPicture } from '@pluritech/ion-facebook-provider';
@@ -141,6 +141,7 @@ export class HomePage {
  Field | Can be null | Description
 ------ | ----------- | ----------- 
 data | false | the data ProfilePictureSource. See more: [Profile Picture Source](https://developers.facebook.com/docs/graph-api/reference/profile-picture-source/)
+data.base64 | true | If the setBase64 is True, the base 64 of picture will send too:
 
 
 ### Method listPermisions()
