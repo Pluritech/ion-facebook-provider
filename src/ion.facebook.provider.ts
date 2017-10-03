@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { FbLoginResponse } from './models/facebook';
+import { FbLoginResponse, UserPicture, PermissionsUser } from './models/facebook';
 
 @Injectable()
 export class IonFacebookProvider {
@@ -28,7 +28,7 @@ export class IonFacebookProvider {
     return this.fb.logout();
   }
 
-  public getPictureUser() {
+  public getPictureUser(): Promise<UserPicture> {
     return this.requestDataByGraphApi('me/picture/?redirect=false');
   }
 
@@ -63,7 +63,7 @@ export class IonFacebookProvider {
     });
   }
 
-  public getPermissions(): Promise<any> {
+  public getPermissions(): Promise<PermissionsUser> {
     return this.requestDataByGraphApi('/me/permissions')
       .then(data => this._handleDataPermission(data));
   }
@@ -93,7 +93,7 @@ export class IonFacebookProvider {
       .catch(error => user);
   }
 
-  private _handleDataPermission(data: any): {[key: string]: string} {
+  private _handleDataPermission(data: any): PermissionsUser {
     const permissions = {};
     data.data.forEach(p => permissions[p.permission] = p.status);
     return permissions;
