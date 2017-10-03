@@ -3,7 +3,7 @@ The wrapper to Facebook Connect plugin from [Ionic Native](https://ionicframewor
 
 ## Installation
 
-### First, install the Facebook Connect Plugin from Ionic Native [Ionic Native](https://ionicframework.com/docs/native/facebook/)
+### First, install the Facebook Connect Plugin from [Ionic Native](https://ionicframework.com/docs/native/facebook/)
 
 then install this library, run:
 
@@ -11,7 +11,7 @@ then install this library, run:
 $ npm install @pluritech/ion-facebook-provider --save
 ```
 
-## Consuming your library
+## Consuming ion-facebook-provider
 
 and then from your Ionic Project `AppModule`:
 
@@ -86,6 +86,7 @@ export class HomePage {
 }
 ```
 - What there in **FbLoginResponse**
+
  Field | Can be null | Description
 ------ | ----------- | ----------- 
 header | false | header with key 'AcessTokenFb' and value as accessToken from authResponse at Facebook
@@ -136,6 +137,7 @@ export class HomePage {
 }
 ```
 - What there in **UserPicture**
+
  Field | Can be null | Description
 ------ | ----------- | ----------- 
 data | false | the data ProfilePictureSource. See more: [Profile Picture Source](https://developers.facebook.com/docs/graph-api/reference/profile-picture-source/)
@@ -176,6 +178,7 @@ export class HomePage {
 }
 ```
 - What there in **PermissionsUser**
+
 The object {key: value} where key is the name of permission and the value is your state that can be ['granted' || 'declined'] 
 
 ### Method requestDataByGraphApi(path: string, permissions?: string[])
@@ -193,6 +196,7 @@ export class HomePage {
       .catch(error => console.log(error));
   }
 }
+```
 
 ## Development
 
