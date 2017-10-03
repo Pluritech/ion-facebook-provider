@@ -34,7 +34,7 @@ import { IonFacebookProviderModule } from '@pluritech/ion-facebook-provider';
     BrowserModule,
 
     // Dont forget put them here
-    IonFacebookProviderModule,
+    IonFacebookProviderModule.forRoot(['user_friends', 'email', 'public_profile']),
     Facebook
 
   ],
@@ -43,6 +43,8 @@ import { IonFacebookProviderModule } from '@pluritech/ion-facebook-provider';
 })
 export class AppModule { }
 ```
+
+The list of permission can set by forRoot. Not required, default is: ['email', 'public_profile']
 
 Once the library is imported, you can use its provider in your Components or Providers:
 ```typescript
