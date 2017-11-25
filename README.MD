@@ -83,7 +83,7 @@ export class HomePage {
   public loginTest(true) {
     this.ionFacebookProvider.login(true)
     .then((res: FbLoginResponse) => console.log(res))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
   }
 }
 ```
@@ -116,7 +116,7 @@ export class HomePage {
   public logoutTest() {
     this.ionFacebookProvider.logout()
       .then((res) => console.log(res))
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
 }
 ```
@@ -134,7 +134,7 @@ export class HomePage {
   public getPictureUser() {
     this.ionFacebookProvider.getPictureUser()
       .then((picture: UserPicture) => console.log(picture))
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
 }
 ```
@@ -176,7 +176,7 @@ export class HomePage {
   public getPermissionUserFacebook() {
     this.ionFacebookProvider.getPermissions()
       .then((permissions: PermissionsUser) => console.log(permissions))
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
 }
 ```
@@ -196,7 +196,7 @@ export class HomePage {
   public getGraphAPI() {
     this.ionFacebookProvider.requestDataByGraphApi('/me/photos')
       .then(photos => console.log(photos))
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
 }
 ```
